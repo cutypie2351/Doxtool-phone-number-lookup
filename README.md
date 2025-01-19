@@ -2,14 +2,14 @@
 Doxtool is a Python tool made by Cutypie, This tool gives you the ability to reverse phone number lookups.
 The tool sending multiple caller id request to their databases using encrypt and decrypt request body technology that include more then 4 Layers of encryptions.
 
-# What does it do?
+## What does it do?
 - Gets information about phone numbers from 2 different databases
 - Shows names, pictures, and locations connected to the number
 - Checks if the number is used for spam
 - Shows social media profiles if available
 
 
-# Encryption Used
+## Encryption Used
 ### Database 1 (CallerID):
 - MD5 hash for security
 - Base64 encoding
