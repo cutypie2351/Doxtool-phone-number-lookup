@@ -29,12 +29,12 @@ The tool sending multiple caller id request to their databases using encrypt and
 - I analyzed their API request to understand how the security work and how the data sent (Headers, stamp, base64 phone number format, etc...)
 - I used ADB to dump the app, then found an encryption native library ".so" file exstention.
 - I used IDA to reverse the native library and found the encryption process the app is using
-- Using jadx-gui i found another encryption layer of the request body data that using shifting algorithm to make it harder to reverse
+- Using jadx-gui + Frida to hook another encryption layer fuction of the request body data that using shifting algorithm to make it harder to reverse
 - Made a full python script that Decrypt all of this process and get the clear decoded data from the database.
 
 ### SyncMe App (Database 2)
 -  I analyzed their API request also to understand the request format and the security usage.
--  Found that thet using multiple of layers encryptions such us:
+-  Found that thet using multiple of layers encryptions using Frida tool such us:
   * AES-128: for the request body encryption
   * RSA: for the AES key
   * Custom request Stamping algorithm
