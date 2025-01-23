@@ -21,7 +21,7 @@ The tool sending multiple caller id request to their databases using encrypt and
 - Opening Hours Business
 - Street
 - Jobs
-- Google Map Places Id
+- Google Map Places Coords
 - Region
 - Report count
 - Old phone number
