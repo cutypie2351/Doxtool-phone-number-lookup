@@ -24,9 +24,13 @@ The tool sending multiple caller id request to their databases using encrypt and
 
 ### Database 3 (CallApp):
 - hashing
+- URL Encoding
+- GZIP compression
 
 ### Database 4 (Eyecon):
 - auth keys header hashing
+- URL Encoding
+- GZIP compression
 
 **Sync.ME** also have a website you can use with limited search (https://sync.me/)
 
