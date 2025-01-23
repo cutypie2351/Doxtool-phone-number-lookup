@@ -22,10 +22,10 @@ The tool sending multiple caller id request to their databases using encrypt and
 - Random IV generation
 - PKCS7 padding
 
-  ### Database 3 (CallApp):
+### Database 3 (CallApp):
 - hashing
 
-  ### Database 4 (Eyenon):
+### Database 4 (Eyenon):
 - auth keys header hashing
 
 **Sync.ME** also have a website you can use with limited search (https://sync.me/)
