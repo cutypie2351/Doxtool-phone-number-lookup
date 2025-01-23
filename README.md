@@ -8,6 +8,26 @@ The tool sending multiple caller id request to their databases using encrypt and
 - Checks if the number is used for spam
 - Shows social media profiles if available
 
+## Features
+- Profile Picture
+- First Name, Last Name
+- Is a Spammer
+- Location Address
+- Country
+- Description
+- Facebook Profile Data
+- Facebook Profile Link
+- Business Website
+- Opening Hours Business
+- Street
+- Jobs
+- Google Map Places Id
+- Region
+- Report count
+- Old phone number
+- Phone type
+- Etc...
+
 
 ## Encryption Used
 ### Database 1 (CallerID):
