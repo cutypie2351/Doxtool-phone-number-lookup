@@ -22,6 +22,7 @@ import hashlib
 from time import sleep
 from datetime import datetime
 import json as jsond
+import random
 
 
 class init_func:
@@ -535,9 +536,9 @@ class CallerID:
                         report_count = json_object.get('report_count', '')
                         old_tel_number = json_object.get('old_tel_number', '')
                         type_num = json_object.get('type_label', '')
-                        print("\n[*] Checking in (DataBase 1): " + name)
+                        print("\n[*] Checking in (DataBase 1): ")
                         if name:
-                            print("\n[+] Found Name (DataBase 1): " + name)
+                            print("[+] Found Name (DataBase 1): " + name)
                         # else:
                         #     print("[-] Couldn't find Name in - (DataBase 1):")
                         if picture:
@@ -578,7 +579,183 @@ class CallerID:
 
 
 
+class CallApp:
     
+
+    
+    def send_request(self, phone_number, more):
+
+        url = f"https://s.callapp.com/callapp-server/csrch?cpn=%2B{phone_number}&myp=gp.106898501948939491020&ibs=0&cid=0&tk=0011243853&cvc=2206"
+        
+
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+            "Host": "s.callapp.com",
+            "Connection": "Keep-Alive",
+            "Accept-Encoding": "gzip"
+        }
+        
+        try:
+            response = requests.get(url, headers=headers)
+            try:
+                cout = 0
+                response_data = response.content.decode('utf-8')
+                response_json = json.loads(response_data)
+                if more:
+                    print("DataBase 3 Information:")
+                    print(json.dumps(response_json, ensure_ascii=False, indent=2))
+                else:
+                    print("\n[*] Checking in (DataBase 3):")
+                    name = response_json.get('name', '')
+                    priority = response_json.get('priority', '')
+                    website = response_json.get('websites', '')
+                    address = response_json.get('addresses', '')
+                    picture = response_json.get('photoUrl', '')
+                    categories = response_json.get('categories', '')
+                    description = response_json.get('description', '')
+                    business_url = response_json.get('url', '')
+                    facebookID = response_json.get('facebookID', '')
+                    if name:
+                        print(f"[+] Found Name: {name}")
+                        cout += 1
+                    if picture:
+                        print(f"[+] Found Picture: {picture}")
+                        cout += 1
+                    if description:
+                        print(f"[+] Found Description: {description}")
+                        cout += 1
+                    if business_url:
+                        print(f"[+] Found Business Url: {business_url}")
+                        cout += 1
+                    if facebookID:
+                        print(f"[+] Found Facebook Profile: {facebookID}")
+                        cout += 1
+                    if website:
+                        cout += 1
+                        if len(website) > 0:
+                            websiteurl1 = website[0].get('websiteUrl', '')
+                            print(f"[+] Found Website: {websiteurl1}")
+                        if len(website) > 1:
+                            websiteurl2 = website[1].get('websiteUrl', '')
+                            if websiteurl2:
+                                print(f"[+] Found Website 2: {websiteurl2}")
+                    if address:
+                        cout += 1
+                        if len(address) > 0:
+                            address1 = address[0].get('street', '')
+                            print(f"[+] Found Street: {address1}")
+                        if len(address) > 1:
+                            address2 = address[1].get('street', '')
+                            if address2:
+                                print(f"[+] Found Street 2: {address2}")
+                    if categories:
+                        cout += 1
+                        if len(categories) > 0:
+                            categories1 = categories[0].get('name', '')
+                            print(f"[+] Found categorie: {categories1}")
+                    
+
+                    if priority:
+                        cout += 1
+                        print(f"[+] Found priority: {priority}")
+                    
+                    if cout > 3:
+                        print(f"[+] Found a lot if Data, Use 'More Info' to get all the data!")
+                
+                # parsed_response = response.json()
+                # json_contant = response.content
+                
+            except Exception as content_error:
+                if more:
+                    print("\nDataBase 3 Information:")
+                else:
+                    print("\n[*] Checking in (DataBase 3):")
+                    print(f"No Data Found")
+            
+            return response
+        
+        except requests.RequestException as e:
+            print(f"An error occurred while sending the request: {e}")
+
+
+class Eyecon:
+    def send_request_pic(self, phone_number, more):
+        url_getpic = f"https://api.eyecon-app.com/app/pic?cli={phone_number}&is_callerid=true&size=big&type=0&src=MenifaFragment&cancelfresh=0&cv=vc_538_vn_4.0.538_a"
+        
+        headers_getpic = {
+            "Cache-Control": "no-cache",
+            "Accept": "*/*",
+            "Accept-Encoding": "gzip",
+            "Connection": "Keep-Alive",
+            "e-auth-v": "e1",
+            "e-auth": "fe8d75a6-4e40-422c-951f-f67656e8c101", 
+            "e-auth-c": "47",
+            "e-auth-k": "PgdtSBeR0MumR7fO",
+            "Host": "api.eyecon-app.com",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"
+        }
+
+        session = requests.Session()
+        response = session.get(url_getpic, headers=headers_getpic, allow_redirects=False)  # Disable auto-redirect
+        try:
+            if more:
+                print("\nDataBase 4 Information 1:")
+                redirect_url = response.headers.get('Location')
+                if redirect_url:
+                    print(f"\nPicture Link: {redirect_url}\n")
+            else:
+                print("\n[*] Checking in (DataBase 4):")
+                redirect_url = response.headers.get('Location')
+                if redirect_url:
+                    print(f"[+] Picture Link Found: {redirect_url}")
+                else:
+                    print("[-] No Picture Found")
+            return response
+        except Exception as e:
+            print(f"\nError: {e}")
+            return None
+
+    def send_request_getname(self, phone_number, more):
+        url_getname = f"https://api.eyecon-app.com/app/getnames.jsp?cli={phone_number}&lang=en&is_callerid=true&is_ic=true&cv=vc_538_vn_4.0.538_a&requestApi=URLconnection&source=MenifaFragment"
+        
+        headers_getname = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
+            "accept" : "application/json",
+            "e-auth-v": "e1",
+            "e-auth": "fe8d75a6-4e40-422c-951f-f67656e8c101",
+            "e-auth-c": "47",
+            "e-auth-k": "PgdtSBeR0MumR7fO",
+            "accept-charset":"UTF-8",
+            "content-type":"application/x-www-form-urlencoded; charset=utf-8",
+            "Host": "api.eyecon-app.com",
+            "Connection": "Keep-Alive",
+            "Accept-Encoding": "gzip"
+        }
+
+        try:
+            response = requests.get(url_getname, headers=headers_getname)
+            parsed_response = response.json()
+            if more:
+                
+                print("\nDataBase 4 Information 2:")
+                print(json.dumps(parsed_response, ensure_ascii=False, indent=2))
+            else:
+                if response.content:
+                    if len(parsed_response) > 0:
+                        name = parsed_response[0].get('name', '')
+                        type = parsed_response[0].get('type', '')
+                        if name:
+                            print(f"[+] Found Name: {name}")
+                        if type:
+                            print(f"[+] Found Type: {type}")
+                    # print(json.dumps(parsed_response, ensure_ascii=False, indent=2))
+                else:
+                    print("[-] No Data Found")
+            
+            return response
+        except Exception as e:
+            print(f"Error: {e}")
+            return None
 
             
     
@@ -618,6 +795,8 @@ class Menu:
         exit_rn = False
         syncme = Sync_Me()
         callerid = CallerID()
+        callapp = CallApp()
+        eyecon = Eyecon()
         
         
         print("\n[*] Menu:\n")
@@ -629,10 +808,17 @@ class Menu:
             phone_number = input("[*] Enter Phone Number: ")
             callerid.start_callerid_check(phone_number, False)
             syncme.start_styncme(phone_number, False)
+
+            callapp.send_request(phone_number, False)
+            eyecon.send_request_pic(phone_number, False)
+            eyecon.send_request_getname(phone_number, False)
             more_ = Menu.check_more()
             if more_:
-                syncme.start_styncme(phone_number, True)
                 callerid.start_callerid_check(phone_number, True)
+                syncme.start_styncme(phone_number, True)
+                callapp.send_request(phone_number, True)
+                eyecon.send_request_pic(phone_number, True)
+                eyecon.send_request_getname(phone_number, True)
             exit_ = Menu.check_exit()
             if exit_:
                 exit_rn = True
