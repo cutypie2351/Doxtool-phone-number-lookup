@@ -3,6 +3,7 @@ import gzip
 import io
 import os
 import time
+import re
 import requests
 from hashlib import md5
 import json
@@ -628,7 +629,8 @@ class CallApp:
                         print(f"[+] Found Business Url: {business_url}")
                         cout += 1
                     if facebookID:
-                        print(f"[+] Found Facebook Profile: {facebookID}")
+                        print(f"[+] Found Facebook Profile Data: {facebookID}")
+                        print(f"[+] Found Facebook Profile Link: https://www.facebook.com/profile.php?id={facebookID['id']}")
                         cout += 1
                     if website:
                         cout += 1
@@ -707,7 +709,11 @@ class Eyecon:
                 print("\n[*] Checking in (DataBase 4):")
                 redirect_url = response.headers.get('Location')
                 if redirect_url:
-                    print(f"[+] Picture Link Found: {redirect_url}")
+                    print(f"[+] Picture Link Found: {redirect_url}\n")
+                    match = re.search(r"graph\.facebook\.com/(\d+)/picture", redirect_url)
+                    facebook_id = match.group(1)
+                    if facebook_id:
+                        print(f"[+] Facebook Profile Link Found: https://www.facebook.com/profile.php?id={facebook_id}")
                 else:
                     print("[-] No Picture Found")
             return response
@@ -779,13 +785,13 @@ class Menu:
         print("") 
 
     def check_exit():
-        input_exit = input("[*] Do you want to continue? (y/n):")
+        input_exit = input("[*] Do you want to continue? (y/n): ")
         if input_exit.lower() in ["y", "Y", "yes", "Yes", "YES"]:
             return False
         else:
             return True
     def check_more():
-        input_exit = input("\n[*] Do you want more informations? (y/n):")
+        input_exit = input("\n[*] Do you want more informations? (y/n): ")
         if input_exit.lower() in ["y", "Y", "yes", "Yes", "YES"]:
             return True
         else:
