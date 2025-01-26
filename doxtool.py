@@ -4,6 +4,7 @@ import io
 import os
 import time
 import re
+import httpx
 import requests
 from hashlib import md5
 import json
@@ -246,6 +247,7 @@ class Sync_Me:
 
         # Send the POST request
         syncme.send_post_request(header_key, encoded_data, more)
+
 
 
 class CallerID:
@@ -664,7 +666,7 @@ class CallApp:
                     if cout > 3:
                         print(f"[+] Found a lot if Data, Use 'More Info' to get all the data!")
                 
-                # parsed_response = response.json()
+                # response_j = response.json()
                 # json_contant = response.content
                 
             except Exception as content_error:
@@ -740,21 +742,21 @@ class Eyecon:
 
         try:
             response = requests.get(url_getname, headers=headers_getname)
-            parsed_response = response.json()
+            response_j = response.json()
             if more:
                 
                 print("\nDataBase 4 Information 2:")
-                print(json.dumps(parsed_response, ensure_ascii=False, indent=2))
+                print(json.dumps(response_j, ensure_ascii=False, indent=2))
             else:
                 if response.content:
-                    if len(parsed_response) > 0:
-                        name = parsed_response[0].get('name', '')
-                        type = parsed_response[0].get('type', '')
+                    if len(response_j) > 0:
+                        name = response_j[0].get('name', '')
+                        type = response_j[0].get('type', '')
                         if name:
                             print(f"[+] Found Name: {name}")
                         if type:
                             print(f"[+] Found Type: {type}")
-                    # print(json.dumps(parsed_response, ensure_ascii=False, indent=2))
+                    # print(json.dumps(response_j, ensure_ascii=False, indent=2))
                 else:
                     print("[-] No Data Found")
             
@@ -764,7 +766,125 @@ class Eyecon:
             return None
 
             
+class Truecaller:
+   
+    def find_value_in_list(data_list, tab_name):
+        for item in data_list:
+            if isinstance(item, dict) and tab_name in item:
+                return item[tab_name]  # Return first occurrence of key
+        return None  # Return None if key not found
+
     
+    
+
+    def send_request(self, phone_number, more):
+        tokens = [
+            "Bearer a2i0t--ncJeSVF-VYZg3zGmFzQGZh-rY_c2B16r31IFj9Ie9ql6LVzF8p7KronlL"
+        ]  
+         
+        headers_truecaller = {
+            "accept": "application/json",
+            "authorization": tokens[0],
+            "accept-encoding": "gzip",
+            "user-agent": "Truecaller/14.40.7 (Android;11)"
+        }
+        url = f"https://search5-noneu.truecaller.com/v2/search?q={phone_number}&countryCode=IL&type=4&locAddr=&encoding=json"
+        try:
+            
+            if more:
+                with httpx.Client(http2=True, timeout=10.0) as client:
+                    response = client.get(url, headers=headers_truecaller)
+                    print("\nDataBase 5 Information:")
+                    if response.status_code == 200:
+                        try:
+                            response_j = response.json()
+                            print("Response Data:")
+                            print(json.dumps(response_j, indent=2, ensure_ascii=False))
+                        except json.JSONDecodeError:
+                            print("Response Data (Raw):")
+                            print(response.text)
+                    else:
+                        print("Error Response Data:")
+                        print(response.text)
+            else:
+                print("\n[*] Checking in (DataBase 5):")
+                with httpx.Client(http2=True, timeout=10.0) as client:
+                    response = client.get(url, headers=headers_truecaller)
+                    
+                    response_j = response.json()
+                    data_list = response_j.get('data', '')
+                    json_data = data_list[0]
+                    name = json_data.get('name', '')
+                    gender = json_data.get('gender', '')
+                    addr_list = json_data.get('internetAddresses', '')
+                    email = None
+                    if addr_list:
+                        email = Truecaller.find_value_in_list(addr_list, 'id')
+                    tags = json_data.get('tags', '')
+                    score = json_data.get('score', '')
+                    picture = json_data.get('image', '')
+                    phones_list = json_data.get('phones', '')
+                    carreir = None
+                    if phones_list:
+                        carreir = Truecaller.find_value_in_list(phones_list, 'carrier')
+                    spaminfo = json_data.get('spamInfo', '')
+                    spamtype = None
+                    if spaminfo:
+                        spamtype = spaminfo.get('spamType', '')
+                    addresses_list = json_data.get('addresses', '')
+                    area = None
+                    city = None
+                    Time = None
+                    if addresses_list:
+                        area = Truecaller.find_value_in_list(addresses_list, 'area')
+                        city = Truecaller.find_value_in_list(addresses_list, 'city')
+                        Time = Truecaller.find_value_in_list(addresses_list, 'timeZone')
+
+
+
+                    if response.status_code == 200:
+                        try:
+                            if name:
+                                print(f"[+] Found Name: {name}")
+                            if picture:
+                                print(f"[+] Found Picture Link: {picture}")
+                            if gender:
+                                print(f"[+] Found Gender: {gender}")
+                            if email:
+                                print(f"[+] Found Email: {email}")
+                            if tags:
+                                print(f"[+] Found Tags: {tags}")
+                            if score:
+                                print(f"[+] Found Score: {score}")
+                            if carreir:
+                                print(f"[+] Found Carreir: {carreir}")
+                            if spaminfo:
+                                print(f"[+] Is Spammer: True")
+                            else:
+                                print(f"[+] Is Spammer: False")
+                            if area:
+                                print(f"[+] Found Area: {area}")
+                            if city:
+                                print(f"[+] Found City: {city}")
+                            if Time:
+                                print(f"[+] Found Time: {Time}")
+                            
+                            # print(json.dumps(response_j, indent=2, ensure_ascii=False))
+                        except json.JSONDecodeError:
+                            print(f"[-] Error with server response")
+                            print(response.text)
+                    else:
+                        print("Error Response Data:")
+                        print(response.text)
+
+                    return response
+
+        except Exception as e:
+            print(f"error found: {e}")
+            return None
+        
+
+
 
 
 class Menu:
@@ -803,12 +923,13 @@ class Menu:
         callerid = CallerID()
         callapp = CallApp()
         eyecon = Eyecon()
+        truecaller = Truecaller()
         
         
         print("\n[*] Menu:\n")
         print("     [1] Phone Number Checker")
-        print("     [2] Help")
-        print("     [3] Exit")
+        print("     [4] Help")
+        print("     [5] Exit")
         input_select = input("\n[*] Select Option: ")
         if input_select.lower() in ["1"]:
             phone_number = input("[*] Enter Phone Number: ")
@@ -818,6 +939,8 @@ class Menu:
             callapp.send_request(phone_number, False)
             eyecon.send_request_pic(phone_number, False)
             eyecon.send_request_getname(phone_number, False)
+            truecaller.send_request(phone_number, False)
+
             more_ = Menu.check_more()
             if more_:
                 callerid.start_callerid_check(phone_number, True)
@@ -825,16 +948,22 @@ class Menu:
                 callapp.send_request(phone_number, True)
                 eyecon.send_request_pic(phone_number, True)
                 eyecon.send_request_getname(phone_number, True)
+                truecaller.send_request(phone_number, True)
+                
             exit_ = Menu.check_exit()
             if exit_:
                 exit_rn = True
         if input_select.lower() in ["2"]:
+            pass
+        if input_select.lower() in ["3"]:
+            pass
+        if input_select.lower() in ["4"]:
             print("\nPhone Number Format Example: (IL: 972501111111), (US: 11234567890), etc...\n\nRead Me:\n[*] Phone Number Checker Detials:\n\nPhone Number Checker is an Dox tool that will show you some information about the phone number.\nfor example: name, location, picture, address, if hes a spammer and more...\nUse At Your Own Risk!!! Enjoy!\n")
             exit_ = Menu.check_exit()
             if exit_:
                 exit_rn = True
 
-        elif input_select.lower() in ["3"]:
+        elif input_select.lower() in ["5"]:
             exit_rn = True
 
         os.system('cls')
