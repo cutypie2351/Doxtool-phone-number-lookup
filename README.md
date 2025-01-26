@@ -12,14 +12,17 @@ The tool sending multiple caller id request to their databases using encrypt and
 - Profile Picture
 - First Name, Last Name
 - Location Address
+- Email Address
 - Facebook Profile Data
 - Facebook Profile Link
-- Is a Spammer
+- Is a Spammer (True, False)
 - Country
 - Description
 - Business Website
 - Opening Hours Business
 - Street
+- City
+- Area
 - Jobs
 - Google Map Places Coords
 - Region
