@@ -3,7 +3,7 @@ Doxtool is a Python tool made by Cutypie, This tool gives you the ability to rev
 The tool sending multiple caller id request to their databases using encrypt and decrypt request body technology that include more then 4 Layers of encryptions.
 
 ## What does it do?
-- Gets information about phone numbers from 2 different databases
+- Gets information about phone numbers from 5 different databases
 - Shows names, pictures, and locations connected to the number
 - Checks if the number is used for spam
 - Shows social media profiles if available
