@@ -54,6 +54,10 @@ The tool sending multiple caller id request to their databases using encrypt and
 - URL Encoding
 - GZIP compression
 
+### Database 5 (Truecaller):
+- auth token header generation
+- URL Encoding
+- GZIP compression
 
 
 ## How I Made It
@@ -73,7 +77,7 @@ The tool sending multiple caller id request to their databases using encrypt and
   * GZIP compression: for large requests
   * Made a full python script that Decrypt all of this process and get the clear decoded data from the database.
 
-### CallApp, Eyecon (Database 3 + 4)
+### CallApp, Eyecon, Truecaller (Database 3, 4, 5)
 - This databases added in the new version (23/01/2025) by Me
 - I Found the request format + hooked the functions for auth headers, hashing and more to make the script work
 
