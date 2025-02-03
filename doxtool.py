@@ -7,6 +7,7 @@ import re
 import httpx
 import requests
 from hashlib import md5
+from colorama import Fore, Style
 import json
 import urllib.parse
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
@@ -45,7 +46,7 @@ class init_func:
 
 
     def start(self):
-        print("[*] Loading some stuff, please wait...")
+        print(Fore.GREEN + "[*] Loading some stuff, please wait..." + Style.RESET_ALL)
 
         init_func.clear()
 
@@ -173,32 +174,33 @@ class Sync_Me:
             if more:
                 print("DataBase 2 Information:\n", json.dumps(response_json, ensure_ascii=False, indent=4))
             else:
-                print("\n[*] Checking in (DataBase 2):")
+                # print(Fore.LIGHTGREEN_EX + f"[+] Found Name: {name}" + Style.RESET_ALL)
+                print(Fore.LIGHTBLACK_EX + "\n[*] Checking in (DataBase 2):" + Style.RESET_ALL)
                 # print("DataBase 2 Information:\n", json.dumps(response_json, ensure_ascii=False, indent=4))
                 name = response_json.get('name', '')
                     
                 if name:
-                    print("[+] Found Name (DataBase 2): " + name)
+                    print(Fore.LIGHTGREEN_EX + "[+] Found Name (DataBase 2): " + name + Style.RESET_ALL)
                 # else:
                 #     print("[-] Couldn't find Name in - (DataBase 2):")
                 picture = response_json.get('picture', '')
                 if picture:
-                    print("[+] Found Picture (DataBase 2): " + picture)
+                    print(Fore.LIGHTGREEN_EX + "[+] Found Picture (DataBase 2): " + picture + Style.RESET_ALL)
                 # else:
                 #     print("[-] Couldn't find Picture in - (DataBase 2):")
                 country = response_json.get('geospace', '{}').get('country', '')
                 if country:
-                    print("[+] Found Country (DataBase 2): " + country)
+                    print(Fore.LIGHTGREEN_EX + "[+] Found Country (DataBase 2): " + country + Style.RESET_ALL)
                 # else:
                 #     print("[-] Couldn't find Country in - (DataBase 2):")
                 spam_count = response_json.get('spam', '')
                 if spam_count:
-                    print("[+] Found Spam Count (DataBase 2): " + str(spam_count))
+                    print(Fore.LIGHTGREEN_EX + "[+] Found Spam Count (DataBase 2): " + str(spam_count) + Style.RESET_ALL)
                 # else:
                 #     print("[-] Couldn't find Spam Count in - (DataBase 2):")
                 big_spammer = response_json.get('big_spammer', '')
                 if big_spammer:
-                    print("[+] Found if Big Spammer (DataBase 2): " + str(big_spammer))
+                    print(Fore.LIGHTGREEN_EX + "[+] Found if Big Spammer (DataBase 2): " + str(big_spammer) + Style.RESET_ALL)
                 # else:
                 #     print("[-] Couldn't if Big Spammer in - (DataBase 2):")
 
@@ -207,24 +209,24 @@ class Sync_Me:
                     network = networks[0]  # Get the first network
                     networks_firstname = network.get('first_name', '')
                     if networks_firstname:
-                        print("[+] Found networks first name (DataBase 2): " + networks_firstname)
+                        print(Fore.LIGHTGREEN_EX + "[+] Found networks first name (DataBase 2): " + networks_firstname + Style.RESET_ALL)
 
                     networks_lastname = network.get('last_name', '')
                     if networks_lastname:
-                        print("[+] Found networks last name (DataBase 2): " + networks_lastname)
+                        print(Fore.LIGHTGREEN_EX + "[+] Found networks last name (DataBase 2): " + networks_lastname + Style.RESET_ALL)
                     
                     networks_picture = network.get('thumbnail', '')
                     if networks_picture:
-                        print("[+] Found networks picture (DataBase 2): " + networks_picture)
+                        print(Fore.LIGHTGREEN_EX + "[+] Found networks picture (DataBase 2): " + networks_picture + Style.RESET_ALL)
                     
                     networks_sn_id = network.get('sn_id', '')
                     if networks_sn_id:
-                        print("[+] Found networks sn_id (DataBase 2): " + networks_sn_id + "\n")
+                        print(Fore.LIGHTGREEN_EX + "[+] Found networks sn_id (DataBase 2): " + networks_sn_id + "\n" + Style.RESET_ALL)
                 # else:
                 #     print("[-] Couldn't find networks_sn_id in - (DataBase 2):")
 
         else:
-            print("Unexpected response format from DataBase 2")
+            print(Fore.RED + "Unexpected response format from DataBase 2" + Style.RESET_ALL)
 
 
         # if 'premium_metadata' in response_json and 'relationships' in response_json['premium_metadata']:
@@ -539,32 +541,33 @@ class CallerID:
                         report_count = json_object.get('report_count', '')
                         old_tel_number = json_object.get('old_tel_number', '')
                         type_num = json_object.get('type_label', '')
-                        print("\n[*] Checking in (DataBase 1): ")
+                        
+                        print(Fore.LIGHTBLACK_EX + "\n[*] Checking in (DataBase 1): " + Style.RESET_ALL)
                         if name:
-                            print("[+] Found Name (DataBase 1): " + name)
+                            print(Fore.LIGHTGREEN_EX + "[+] Found Name (DataBase 1): " + name + Style.RESET_ALL)
                         # else:
                         #     print("[-] Couldn't find Name in - (DataBase 1):")
                         if picture:
-                            print("[+] Found Picture (DataBase 1): " + picture)
+                            print(Fore.LIGHTGREEN_EX + "[+] Found Picture (DataBase 1): " + picture + Style.RESET_ALL)
                         # else:
                         #     print("[-] Couldn't find Picture in - (DataBase 1):")
                         if location:
-                            print("[+] Found Location (DataBase 1): " + location)
+                            print(Fore.LIGHTGREEN_EX + "[+] Found Location (DataBase 1): " + location + Style.RESET_ALL)
                         # else:
                         #     print("[-] Couldn't find Location in - (DataBase 1):")
                         if address:
-                            print("[+] Found Address (DataBase 1): " + address)
+                            print(Fore.LIGHTGREEN_EX + "[+] Found Address (DataBase 1): " + address + Style.RESET_ALL)
                         # else:
                         #     print("[-] Couldn't find Address in - (DataBase 1):")
                         if report_count:
-                            print("[+] Found Report Count (DataBase 1): " + str(report_count))
+                            print(Fore.LIGHTGREEN_EX + "[+] Found Report Count (DataBase 1): " + str(report_count) + Style.RESET_ALL)
                         # else:
                         #     print("[-] Couldn't find Report Count in - (DataBase 1):")
                         if old_tel_number:
-                            print("[+] Found Old Phone Number (DataBase 1): " + str(old_tel_number))
+                            print(Fore.LIGHTGREEN_EX + "[+] Found Old Phone Number (DataBase 1): " + str(old_tel_number) + Style.RESET_ALL)
 
                         if type_num:
-                            print("[+] Found the Type of the Number (DataBase 1): " + type_num)
+                            print(Fore.LIGHTGREEN_EX + "[+] Found the Type of the Number (DataBase 1): " + type_num + Style.RESET_ALL)
                         # else:
                         #     print("[-] Couldn't find Old Phone Number in - (DataBase 1):\n")
 
@@ -572,13 +575,13 @@ class CallerID:
                     # print("\nCaller ID Response:")
                     # print(json.dumps(json_object, indent=4) + "\n")
                 except json.JSONDecodeError:
-                    print("Failed to parse the response as JSON.")
+                    print(Fore.RED + "Failed to parse the response as JSON." + Style.RESET_ALL)
                     # print(f"Raw response: {final_result}")
             else:
-                print("Failed to decode the base64 string in decode_l.")
+                print(Fore.RED + "Failed to decode the base64 string in decode_l." + Style.RESET_ALL)
 
         else:
-            print("Failed to decode the string in decode_a.")
+            print(Fore.RED + "Failed to decode the string in decode_a." + Style.RESET_ALL)
 
 
 
@@ -608,7 +611,8 @@ class CallApp:
                     print("DataBase 3 Information:")
                     print(json.dumps(response_json, ensure_ascii=False, indent=2))
                 else:
-                    print("\n[*] Checking in (DataBase 3):")
+                    # print(Fore.LIGHTGREEN_EX + "     [2] Help" + Style.RESET_ALL)
+                    print(Fore.LIGHTBLACK_EX + "\n[*] Checking in (DataBase 3):" + Style.RESET_ALL)
                     name = response_json.get('name', '')
                     priority = response_json.get('priority', '')
                     website = response_json.get('websites', '')
@@ -619,52 +623,52 @@ class CallApp:
                     business_url = response_json.get('url', '')
                     facebookID = response_json.get('facebookID', '')
                     if name:
-                        print(f"[+] Found Name: {name}")
+                        print(Fore.LIGHTGREEN_EX + f"[+] Found Name: {name}" + Style.RESET_ALL)
                         cout += 1
                     if picture:
-                        print(f"[+] Found Picture: {picture}")
+                        print(Fore.LIGHTGREEN_EX + f"[+] Found Picture: {picture}" + Style.RESET_ALL)
                         cout += 1
                     if description:
-                        print(f"[+] Found Description: {description}")
+                        print(Fore.LIGHTGREEN_EX + f"[+] Found Description: {description}" + Style.RESET_ALL)
                         cout += 1
                     if business_url:
-                        print(f"[+] Found Business Url: {business_url}")
+                        print(Fore.LIGHTGREEN_EX + f"[+] Found Business Url: {business_url}" + Style.RESET_ALL)
                         cout += 1
                     if facebookID:
-                        print(f"[+] Found Facebook Profile Data: {facebookID}")
-                        print(f"[+] Found Facebook Profile Link: https://www.facebook.com/profile.php?id={facebookID['id']}")
+                        print(Fore.LIGHTGREEN_EX + f"[+] Found Facebook Profile Data: {facebookID}" + Style.RESET_ALL)
+                        print(Fore.LIGHTGREEN_EX + f"[+] Found Facebook Profile Link: https://www.facebook.com/profile.php?id={facebookID['id']}" + Style.RESET_ALL)
                         cout += 1
                     if website:
                         cout += 1
                         if len(website) > 0:
                             websiteurl1 = website[0].get('websiteUrl', '')
-                            print(f"[+] Found Website: {websiteurl1}")
+                            print(Fore.LIGHTGREEN_EX + f"[+] Found Website: {websiteurl1}" + Style.RESET_ALL)
                         if len(website) > 1:
                             websiteurl2 = website[1].get('websiteUrl', '')
                             if websiteurl2:
-                                print(f"[+] Found Website 2: {websiteurl2}")
+                                print(Fore.LIGHTGREEN_EX + f"[+] Found Website 2: {websiteurl2}" + Style.RESET_ALL)
                     if address:
                         cout += 1
                         if len(address) > 0:
                             address1 = address[0].get('street', '')
-                            print(f"[+] Found Street: {address1}")
+                            print(Fore.LIGHTGREEN_EX + f"[+] Found Street: {address1}" + Style.RESET_ALL)
                         if len(address) > 1:
                             address2 = address[1].get('street', '')
                             if address2:
-                                print(f"[+] Found Street 2: {address2}")
+                                print(Fore.LIGHTGREEN_EX + f"[+] Found Street 2: {address2}" + Style.RESET_ALL)
                     if categories:
                         cout += 1
                         if len(categories) > 0:
                             categories1 = categories[0].get('name', '')
-                            print(f"[+] Found categorie: {categories1}")
+                            print(Fore.LIGHTGREEN_EX + f"[+] Found categorie: {categories1}" + Style.RESET_ALL)
                     
 
                     if priority:
                         cout += 1
-                        print(f"[+] Found priority: {priority}")
+                        print(Fore.LIGHTGREEN_EX + f"[+] Found priority: {priority}" + Style.RESET_ALL)
                     
                     if cout > 3:
-                        print(f"[+] Found a lot if Data, Use 'More Info' to get all the data!")
+                        print(Fore.YELLOW + f"[+] Found a lot if Data, Use 'More Info' to get all the data!" + Style.RESET_ALL)
                 
                 # response_j = response.json()
                 # json_contant = response.content
@@ -673,13 +677,13 @@ class CallApp:
                 if more:
                     print("\nDataBase 3 Information:")
                 else:
-                    print("\n[*] Checking in (DataBase 3):")
-                    print(f"No Data Found")
+                    print(Fore.LIGHTBLACK_EX + "\n[*] Checking in (DataBase 3):" + Style.RESET_ALL)
+                    print(Fore.RED + f"No Data Found" + Style.RESET_ALL)
             
             return response
         
         except requests.RequestException as e:
-            print(f"An error occurred while sending the request: {e}")
+            print(Fore.RED + f"An error occurred while sending the request: {e}" + Style.RESET_ALL)
 
 
 class Eyecon:
@@ -692,8 +696,8 @@ class Eyecon:
             "Accept-Encoding": "gzip",
             "Connection": "Keep-Alive",
             "e-auth-v": "e1",
-            "e-auth": "fe8d75a6-4e40-422c-951f-f67656e8c101", 
-            "e-auth-c": "47",
+            "e-auth": "4e728c50-2991-424e-9b74-2edae43f1b3a", 
+            "e-auth-c": "21",
             "e-auth-k": "PgdtSBeR0MumR7fO",
             "Host": "api.eyecon-app.com",
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"
@@ -708,19 +712,20 @@ class Eyecon:
                 if redirect_url:
                     print(f"\nPicture Link: {redirect_url}\n")
             else:
-                print("\n[*] Checking in (DataBase 4):")
+
+                print(Fore.LIGHTBLACK_EX + "\n[*] Checking in (DataBase 4):" + Style.RESET_ALL)
                 redirect_url = response.headers.get('Location')
                 if redirect_url:
-                    print(f"[+] Picture Link Found: {redirect_url}\n")
+                    print(Fore.LIGHTGREEN_EX + f"[+] Picture Link Found: {redirect_url}\n" + Style.RESET_ALL)
                     match = re.search(r"graph\.facebook\.com/(\d+)/picture", redirect_url)
                     facebook_id = match.group(1)
                     if facebook_id:
-                        print(f"[+] Facebook Profile Link Found: https://www.facebook.com/profile.php?id={facebook_id}")
+                        print(Fore.LIGHTGREEN_EX + f"[+] Facebook Profile Link Found: https://www.facebook.com/profile.php?id={facebook_id}" + Style.RESET_ALL)
                 else:
-                    print("[-] No Picture Found")
+                    print(Fore.RED + "[-] No Picture Found" + Style.RESET_ALL)
             return response
         except Exception as e:
-            print(f"\nError: {e}")
+            print(Fore.RED + f"\nError: {e}" + Style.RESET_ALL)
             return None
 
     def send_request_getname(self, phone_number, more):
@@ -730,8 +735,8 @@ class Eyecon:
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
             "accept" : "application/json",
             "e-auth-v": "e1",
-            "e-auth": "fe8d75a6-4e40-422c-951f-f67656e8c101",
-            "e-auth-c": "47",
+            "e-auth": "4e728c50-2991-424e-9b74-2edae43f1b3a",
+            "e-auth-c": "21",
             "e-auth-k": "PgdtSBeR0MumR7fO",
             "accept-charset":"UTF-8",
             "content-type":"application/x-www-form-urlencoded; charset=utf-8",
@@ -753,12 +758,12 @@ class Eyecon:
                         name = response_j[0].get('name', '')
                         type = response_j[0].get('type', '')
                         if name:
-                            print(f"[+] Found Name: {name}")
+                            print(Fore.LIGHTGREEN_EX + f"[+] Found Name: {name}" + Style.RESET_ALL)
                         if type:
-                            print(f"[+] Found Type: {type}")
+                            print(Fore.RED + f"[+] Found Type: {type}" + Style.RESET_ALL)
                     # print(json.dumps(response_j, ensure_ascii=False, indent=2))
                 else:
-                    print("[-] No Data Found")
+                    print(Fore.RED + f"[-] No Data Found" + Style.RESET_ALL)
             
             return response
         except Exception as e:
@@ -807,7 +812,7 @@ class Truecaller:
                         print("Error Response Data:")
                         print(response.text)
             else:
-                print("\n[*] Checking in (DataBase 5):")
+                print(Fore.LIGHTBLACK_EX + "\n[*] Checking in (DataBase 5):" + Style.RESET_ALL)
                 with httpx.Client(http2=True, timeout=10.0) as client:
                     response = client.get(url, headers=headers_truecaller)
                     
@@ -845,42 +850,42 @@ class Truecaller:
                     if response.status_code == 200:
                         try:
                             if name:
-                                print(f"[+] Found Name: {name}")
+                                print(Fore.LIGHTGREEN_EX + f"[+] Found Name: {name}" + Style.RESET_ALL)
                             if picture:
-                                print(f"[+] Found Picture Link: {picture}")
+                                print(Fore.LIGHTGREEN_EX + f"[+] Found Picture Link: {picture}" + Style.RESET_ALL)
                             if gender:
-                                print(f"[+] Found Gender: {gender}")
+                                print(Fore.LIGHTGREEN_EX + f"[+] Found Gender: {gender}" + Style.RESET_ALL)
                             if email:
-                                print(f"[+] Found Email: {email}")
+                                print(Fore.LIGHTGREEN_EX + f"[+] Found Email: {email}" + Style.RESET_ALL)
                             if tags:
-                                print(f"[+] Found Tags: {tags}")
+                                print(Fore.LIGHTGREEN_EX + f"[+] Found Tags: {tags}" + Style.RESET_ALL)
                             if score:
-                                print(f"[+] Found Score: {score}")
+                                print(Fore.LIGHTGREEN_EX + f"[+] Found Score: {score}" + Style.RESET_ALL)
                             if carreir:
-                                print(f"[+] Found Carreir: {carreir}")
+                                print(Fore.LIGHTGREEN_EX + f"[+] Found Carreir: {carreir}" + Style.RESET_ALL)
                             if spaminfo:
-                                print(f"[+] Is Spammer: True")
+                                print(Fore.RED + f"[+] Is Spammer: True" + Style.RESET_ALL)
                             else:
-                                print(f"[+] Is Spammer: False")
+                                print(Fore.GREEN + f"[+] Is Spammer: False" + Style.RESET_ALL)
                             if area:
-                                print(f"[+] Found Area: {area}")
+                                print(Fore.LIGHTGREEN_EX + f"[+] Found Area: {area}" + Style.RESET_ALL)
                             if city:
-                                print(f"[+] Found City: {city}")
+                                print(Fore.LIGHTGREEN_EX + f"[+] Found City: {city}" + Style.RESET_ALL)
                             if Time:
-                                print(f"[+] Found Time: {Time}")
+                                print(Fore.LIGHTGREEN_EX + f"[+] Found Time: {Time}" + Style.RESET_ALL)
                             
                             # print(json.dumps(response_j, indent=2, ensure_ascii=False))
                         except json.JSONDecodeError:
-                            print(f"[-] Error with server response")
-                            print(response.text)
+                            print(Fore.RED + f"[-] Error with server response" + Style.RESET_ALL)
+                            # print(response.text)
                     else:
-                        print("Error Response Data:")
-                        print(response.text)
+                        print(Fore.RED + "Error Response Data:" + Style.RESET_ALL)
+                        #print(response.text)
 
                     return response
 
         except Exception as e:
-            print(f"error found: {e}")
+            print(Fore.RED + f"error found: {e}" + Style.RESET_ALL)
             return None
         
 
@@ -927,9 +932,9 @@ class Menu:
         
         
         print("\n[*] Menu:\n")
-        print("     [1] Phone Number Checker")
-        print("     [4] Help")
-        print("     [5] Exit")
+        print(Fore.LIGHTBLACK_EX + "     [1] Phone Number Checker" + Style.RESET_ALL)
+        print(Fore.LIGHTGREEN_EX + "     [2] Help" + Style.RESET_ALL)
+        print(Fore.RED + "     [3] Exit" + Style.RESET_ALL)
         input_select = input("\n[*] Select Option: ")
         if input_select.lower() in ["1"]:
             phone_number = input("[*] Enter Phone Number: ")
@@ -954,16 +959,13 @@ class Menu:
             if exit_:
                 exit_rn = True
         if input_select.lower() in ["2"]:
-            pass
-        if input_select.lower() in ["3"]:
-            pass
-        if input_select.lower() in ["4"]:
-            print("\nPhone Number Format Example: (IL: 972501111111), (US: 11234567890), etc...\n\nRead Me:\n[*] Phone Number Checker Detials:\n\nPhone Number Checker is an Dox tool that will show you some information about the phone number.\nfor example: name, location, picture, address, if hes a spammer and more...\nUse At Your Own Risk!!! Enjoy!\n")
+            print(Fore.LIGHTGREEN_EX + "\nPhone Number Format Example: (IL: 972501111111), (US: 11234567890), etc...\n\nRead Me:\n[*] Phone Number Checker Detials:\n\nPhone Number Checker is an Dox tool that will show you some information about the phone number.\nfor example: name, location, picture, address, if hes a spammer and more...\nUse At Your Own Risk!!! Enjoy!\n" + Style.RESET_ALL)
+            # print("\nPhone Number Format Example: (IL: 972501111111), (US: 11234567890), etc...\n\nRead Me:\n[*] Phone Number Checker Detials:\n\nPhone Number Checker is an Dox tool that will show you some information about the phone number.\nfor example: name, location, picture, address, if hes a spammer and more...\nUse At Your Own Risk!!! Enjoy!\n")
             exit_ = Menu.check_exit()
             if exit_:
                 exit_rn = True
 
-        elif input_select.lower() in ["5"]:
+        elif input_select.lower() in ["3"]:
             exit_rn = True
 
         os.system('cls')
