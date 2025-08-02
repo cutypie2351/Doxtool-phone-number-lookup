@@ -1,5 +1,5 @@
-# Doxtool-phone-number-lookup
-Doxtool is a Python tool made by Cutypie, This tool gives you the ability to reverse phone number lookups.
+phone-number-lookup
+phone-number-lookup is a Python tool made by Cutypie, This tool gives you the ability to reverse phone number lookups.
 The tool sending multiple caller id request to their databases using encrypt and decrypt request body technology that include more then 4 Layers of encryptions.
 
 ## What does it do?
